@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Mapping Simulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="brand">
+                <span class="brand-mark"></span>
+                <div><h1>ROBOT MAPPER</h1><p>Stealth cartography protocol</p></div>
+            </div>
+            <div class="controls-help"><strong>WASD</strong> bergerak <strong>SHIFT</strong> lari <strong>SPACE</strong> mengendap</div>
+            <button id="mute-btn" class="utility-btn" type="button">SOUND ON</button>
+        </header>
+
+        <main id="game-container">
+            <canvas id="map-canvas" class="hidden-canvas"></canvas>
+            <canvas id="main-canvas"></canvas>
+
+            <section id="hud" aria-label="Status misi">
+                <div class="hud-cell"><span>LEVEL</span><b id="level-value">1</b></div>
+                <div class="hud-cell"><span>TIME</span><b id="timer-value">00:00</b></div>
+                <div class="hud-cell"><span>COVERAGE</span><b id="coverage-value">0.0%</b></div>
+                <div class="hud-cell"><span>DATA CHIPS</span><b id="chips-value">0/0</b></div>
+            </section>
+            <div id="movement-mode" data-mode="normal">NORMAL</div>
+
+            <div id="minimap-container"><canvas id="minimap-canvas"></canvas></div>
+            <div id="joystick-base" aria-label="Kontrol gerak"><div id="joystick-knob"></div></div>
+        </main>
+    </div>
+
+    <div id="results-modal" class="modal-overlay hidden">
+        <div class="modal-content result-content">
+            <span class="eyebrow">MISSION REPORT</span>
+            <h2>MAPPING COMPLETE</h2>
+            <p id="result-level">Facility selesai</p>
+            <div id="result-stars" class="stars" aria-label="Skor bintang">☆☆☆</div>
+            <div class="result-stats">
+                <div><span>COVERAGE</span><b id="result-coverage">0%</b></div>
+                <div><span>TIME</span><b id="result-time">00:00</b></div>
+                <div><span>CHIPS</span><b id="result-chips">0/0</b></div>
+            </div>
+            <div id="result-map-container"><canvas id="result-canvas"></canvas></div>
+            <div class="modal-actions">
+                <button id="restart-btn" class="secondary-btn" type="button">REPLAY</button>
+                <button id="next-level-btn" class="primary-btn" type="button">NEXT LEVEL</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameover-modal" class="modal-overlay hidden">
+        <div class="modal-content gameover-content">
+            <span class="eyebrow">SIGNAL LOST</span>
+            <h2>ROBOT CAPTURED</h2>
+            <p id="gameover-detail">Patroli menemukan posisimu.</p>
+            <button id="retry-btn" class="danger-btn" type="button">RETRY MISSION</button>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+Robot Mapping Simulation - Progress Summary
+Updated: 2026-10-05
+
+STATUS: Semua tugas integrasi utama telah selesai.
+
+Yang sudah diimplementasikan:
+1. Integrasi modul
+- main.js memakai sfx dari audio.js.
+- main.js memakai NavGrid, collision helper, dan line-of-sight dari pathfinding.js.
+- Semua data level diambil dari getLevel(n) di levels.js.
+- Tombol Next Level memuat level prosedural berikutnya.
+
+2. Perbaikan teknis
+- Seluruh gerakan robot, guard, suspicion meter, timer, dan efek memakai delta time.
+- Result canvas memakai rasio dunia 4:3 dan container responsif sehingga peta tidak gepeng.
+- Canvas utama mendukung devicePixelRatio sampai 2 untuk tampilan lebih tajam.
+- Kontrol keyboard dibersihkan saat window kehilangan fokus.
+
+3. Gameplay
+- Guard hanya terlihat saat berada dalam jangkauan sensor robot dan tidak tertutup objek.
+- Guard memiliki state patrol, suspicious, chase, dan return.
+- Suspicion menampilkan tanda ? kuning dan meter; chase menampilkan ! merah.
+- Guard memakai A* NavGrid saat patroli, mengejar, dan kembali ke waypoint.
+- Shift = run: 1.65x cepat, sensor mengecil, guard lebih cepat curiga.
+- Space = sneak: 0.48x cepat, sensor penuh, guard lebih lambat curiga.
+- Data Chip dapat diambil dan menghasilkan efek suara.
+- Finish tidak dikunci oleh chip; chip menjadi komponen bonus skor.
+
+4. HUD dan skor
+- HUD menampilkan level, timer, coverage, jumlah Data Chip, dan mode gerak.
+- Coverage dihitung memakai grid 30 px pada area lantai yang dapat dieksplorasi.
+- Modal hasil menampilkan peta, coverage, waktu, chip, dan skor 1-3 bintang.
+- Tombol Replay, Next Level, dan Retry tersedia.
+
+5. Audio dan visual
+- Efek ping, suspicious, alarm, pickup, win, star, dan caught sudah dipasang.
+- Tombol mute menyimpan preferensi lewat localStorage.
+- Robot memiliki indikator arah hadap.
+- Chase memicu screen shake dan vignette merah berdenyut.
+- UI desktop dan mobile sudah diperbarui; joystick tampil pada perangkat touch/mobile.
+
+Verifikasi yang sudah dilakukan:
+- node --check berhasil untuk main.js, levels.js, pathfinding.js, dan audio.js.
+- Pemuatan lewat HTTP server dan Chrome headless berhasil; modul berjalan dan HUD terisi.
+- Generator getLevel(1) sampai getLevel(10) berhasil dan masing-masing menghasilkan objek, guard, serta chip.
+- Screenshot viewport mobile berhasil dibuat untuk memeriksa layout responsif.
+
+Catatan gameplay saat ini:
+- Ambang bintang mempertimbangkan coverage, chip, dan waktu maksimal 5 menit untuk bonus ketiga.
+- Tidak ada build step atau dependency; jalankan melalui HTTP server karena JavaScript memakai ES modules.
